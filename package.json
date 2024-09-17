@@ -1,7 +1,7 @@
 {
   "name": "ai_sdk",
   "version": "1.0.0",
-  "description": "Instalations chalk",
+  "description": "//reapl.ai",
   "main": "index.mjs",
   "dependencies": {
     "ansi-styles": "^3.2.1",
@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "test index.mjs -y"
+    "test": "node ./index.mjs"
   },
   "author": "reapl",
   "license": "ISC"
