@@ -5,4 +5,4 @@
 <pre>npm install chalk</pre>
 
 - Easy way to test code.
-<pre>node index.js</pre>
+<pre>node index.mjs</pre>
