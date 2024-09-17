@@ -4,3 +4,6 @@
 
 <pre>npm install chalk</pre>
 
+- test
+<pre>node index.js or 
+npm run test</pre>
