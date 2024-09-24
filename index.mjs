@@ -1,28 +1,21 @@
+'use strict';
+
 import readline from 'readline';
 import chalk from 'chalk';
-import API_KEY from './mcs_/api_key.js';
-import saveToMsg from './sdk_save.js';
+import API_KEYS from './mcs_/570.js';
+import SAVE_TO_MSG from './sdk_file.js';
 
-const read = readline.createInterface({
+const main = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-'use strict';
 const askQuestion = () => {
-    const removeMarkdown = (text) => {
-        // Manually remove markdown symbols
-        return text.replace(/(\*+|`+)/g, '');
-    };
-
-    read.question('🌿:  ', async (userText) => {
-        if (userText.toLowerCase() === 'esc') {
-            read.close();
-            return;
-        }
+    main.question(chalk.bold.green.underline('ORDER:  '), async (userText) => {
+        if (userText.toLowerCase() === 'exit') return main.close();
 
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEYS[0]}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -32,12 +25,10 @@ const askQuestion = () => {
             });
 
             const data = await response.json();
-            let contents = data?.candidates[0]?.content?.parts[0]?.text;
+            let task_msg = await  data?.candidates[0]?.content?.parts[0]?.text.replace(/(\*+|`+)/g, '');
+            SAVE_TO_MSG(userText, task_msg);
 
-            contents = removeMarkdown(contents);
-            saveToMsg(userText, contents);
-
-            console.log('💬:  ' + chalk.grey(contents) +'\n');
+            console.log(chalk.bold.underline('GEMINI:  ') + chalk.grey(task_msg) +'\n');
         } catch (error) {
             console.error(error.stack);
         }
@@ -46,4 +37,5 @@ const askQuestion = () => {
     });
 };
 
-askQuestion(); //main @ai_sdk
+setTimeout(() => askQuestion(), 2000);
+                                     
