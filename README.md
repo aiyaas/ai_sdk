@@ -4,6 +4,7 @@
 - You also don't need to worry if the messages that appear in the terminal disappear because you can check all messages in the `mcs_sdk_msg.ini` file to see the message data.
 
 <pre>npm install</pre>
+<pre>yarn install</pre>
 
 - Easy way to test code.
 <pre>node index.mjs</pre>
